@@ -7,7 +7,10 @@ global.config = require('./config');
 
 function _HisDate(dateObj){
   let date = dateObj.getFullYear() + '-' + (dateObj.getMonth()+1) + '-' + dateObj.getDate();
-  let time = dateObj.getHours() + ':' + dateObj.getMinutes() + ':' + dateObj.getSeconds();
+  let hours = (dateObj.getHours() < 10 ? '0' + dateObj.getHours():dateObj.getHours());
+  let minutes =  (dateObj.getMinutes() < 10 ? '0' + dateObj.getMinutes():dateObj.getMinutes());
+  let seconds = (dateObj.getSeconds() < 10 ? '0' + dateObj.getSeconds():dateObj.getSeconds());
+  let time = hours + ':' + minutes + ':' + seconds;
   return date + ' ' + time;
 }
 function _mapRequest(host,port,lineData){
