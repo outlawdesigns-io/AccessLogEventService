@@ -27,7 +27,6 @@ function _handleRequest(host,port,lineData){
 function _registerHost(host){
   let tail = new Tail(host.log_path.replace('/mnt/LOE/','/var/www/html/'));
   tail.on('line',(lineData)=>{_handleRequest(host.label,host.port,lineData)});
-  tail.on('line',_handleRequest);
   tail.on('error',console.error);
 }
 
