@@ -32,7 +32,8 @@ function _registerHost(host){
 }
 
 (async ()=>{
-  let hosts = await Host.getAll();
+  let host = new Host();
+  let hosts = await host.getAll();
   hosts.forEach(_registerHost);
 })();
 

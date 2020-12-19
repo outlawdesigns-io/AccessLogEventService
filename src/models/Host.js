@@ -18,13 +18,13 @@ class Host extends Record{
     ];
   }
   async getAll(){
-    let jobs = [];
+    let objs = [];
     let ids = await this._getAll();
     for(let id in ids){
-      let job = await new Job(ids[id][this.primaryKey])._build();
-      jobs.push(job._buildPublicObj());
+      let obj = await new Host(ids[id][this.primaryKey])._build();
+      objs.push(obj._buildPublicObj());
     }
-    return jobs;
+    return objs;
   }
 }
 
