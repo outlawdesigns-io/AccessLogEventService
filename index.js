@@ -20,7 +20,7 @@ function _mapRequest(host,port,lineData){
   req.referrer = lineData.referrer;
   return req;
 }
-function _handleRequest(lineData){
+function _handleRequest(host,port,lineData){
   let request = _mapRequest(AccessLogParser.parseLine(host,port,lineData));
   console.log(request._buildPublicObj());
 }
