@@ -19,10 +19,10 @@ function _mapRequest(host,port,lineData){
   req.browser = lineData.browser_name.match('Unknown') ? 'NA':lineData.browser_name;
   req.version = lineData.browser_version.match('Unknown') ? '-':lineData.browser_version;
   req.responseCode = lineData.responseCode || 999;
-  req.requestDate = lineData.requestDate;
+  req.requestDate = _HisDate(lineData.requestDate);
   req.requestMethod = lineData.requestMethod || 'KILL';
   req.query = lineData.query || 'NA';
-  req.referrer = lineData.referrer;
+  req.referrer = lineData.referrer || 'NA';
   return req;
 }
 function _handleRequest(host,port,lineData){
@@ -41,20 +41,3 @@ function _registerHost(host){
   let hosts = await host.getAll();
   hosts.forEach(_registerHost);
 })();
-
-
-
-// targetFiles.forEach((file)=>{
-//   let tail = new Tail(file);
-//   tail.on('line',(lineData)=>{_handleRequest(host,port,lineData)});
-//   tail.on('line',_handleRequest);
-//   tail.on('error',console.error);
-// });
-
-// tail = new Tail(targetFile);
-// tail.on("line", function(data) {
-//   console.log(request);
-// });
-// tail.on("error", function(error) {
-//   console.log('ERROR: ', error);
-// });
