@@ -21,7 +21,7 @@ function _mapRequest(host,port,lineData){
   return req;
 }
 function _handleRequest(host,port,lineData){
-  let request = _mapRequest(AccessLogParser.parseLine(host,port,lineData));
+  let request = _mapRequest(host,port,AccessLogParser.parseLine(lineData));
   console.log(request._buildPublicObj());
 }
 function _registerHost(host){
