@@ -6,7 +6,7 @@ class Host extends Record{
 
   constructor(id){
     const database = 'web_access';
-    const table = 'requests';
+    const table = 'hosts';
     const primaryKey = 'id';
     super(database,table,primaryKey,id);
     this.publicKeys = [
