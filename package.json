@@ -1,0 +1,16 @@
+{
+  "name": "watchfile",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "outlawdesigns.io.accesslogparser": "^1.0.0",
+    "outlawdesigns.io.noderecord": "^1.0.4",
+    "tail": "^2.0.4"
+  }
+}
