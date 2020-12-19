@@ -17,6 +17,15 @@ class Host extends Record{
       'log_path'
     ];
   }
+  async getAll(){
+    let jobs = [];
+    let ids = await this._getAll();
+    for(let id in ids){
+      let job = await new Job(ids[id][this.primaryKey])._build();
+      jobs.push(job._buildPublicObj());
+    }
+    return jobs;
+  }
 }
 
 module.exports = Host;
