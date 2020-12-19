@@ -27,7 +27,7 @@ function _mapRequest(host,port,lineData){
 }
 function _handleRequest(host,port,lineData){
   let request = _mapRequest(host,port,AccessLogParser.parseLine(lineData));
-  console.log(request._buildPublicObj());
+  global.config.DEBUG ? console.log(request._buildPublicObj()): request._create();
 }
 function _registerHost(host){
   let logPath = global.config.DEBUG ? host.log_path.replace(global.config.LOGPREFIX,global.config.LOGPREFIX_REP):host.log_path;
