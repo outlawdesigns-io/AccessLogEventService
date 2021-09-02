@@ -5,7 +5,7 @@ const Record = require('outlawdesigns.io.noderecord');
 class Host extends Record{
 
   constructor(id){
-    const database = 'web_access';
+    const database = process.env.NODE_ENV == 'production' ? 'web_access':'web_access_test';
     const table = 'hosts';
     const primaryKey = 'id';
     super(database,table,primaryKey,id);

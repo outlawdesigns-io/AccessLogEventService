@@ -4,6 +4,7 @@ const Host = require('./src/models/Host');
 const Request = require('./src/models/Request');
 
 global.config = require('./config');
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 function _HisDate(dateObj){
   let date = dateObj.getFullYear() + '-' + (dateObj.getMonth()+1) + '-' + dateObj.getDate();
