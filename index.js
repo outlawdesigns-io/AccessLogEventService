@@ -27,6 +27,7 @@ function _mapRequest(host,port,lineData){
   req.requestMethod = lineData.requestMethod || 'KILL';
   req.query = lineData.query || 'NA';
   req.referrer = lineData.referrer || 'NA';
+  req.responseBytes = lineData.responseSize || 0;
   return req;
 }
 function _handleRequest(host,port,lineData){

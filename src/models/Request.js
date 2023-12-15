@@ -21,7 +21,8 @@ class Request extends Record{
       'requestDate',
       'requestMethod',
       'query',
-      'referrer'
+      'referrer',
+      'responseBytes'
     ];
   }
 }

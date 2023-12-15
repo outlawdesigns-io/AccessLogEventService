@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "outlawdesigns.io.accesslogparser": "^1.0.0",
+    "outlawdesigns.io.accesslogparser": "^1.0.2",
     "outlawdesigns.io.noderecord": "^1.0.4",
     "tail": "^2.0.4"
   }
