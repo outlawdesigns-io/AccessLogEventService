@@ -32,10 +32,10 @@ function _mapRequest(host,port,lineData){
 }
 function _handleRequest(host,port,lineData){
   let request = _mapRequest(host,port,AccessLogParser.parseLine(lineData));
-  global.config.DEBUG ? console.log(request._buildPublicObj()): request._create();
+  global.config[process.env.NODE_ENV].DEBUG ? console.log(request._buildPublicObj()): request._create();
 }
 function _registerHost(host){
-  let logPath = global.config.DEBUG ? host.log_path.replace(global.config.LOGPREFIX,global.config.LOGPREFIX_REP):host.log_path;
+  let logPath = global.config[process.env.NODE_ENV].DEBUG ? host.log_path.replace(global.config[process.env.NODE_ENV].LOGPREFIX,global.config[process.env.NODE_ENV].LOGPREFIX_REP):host.log_path;
   let tail = new Tail(logPath);
   tail.on('line',(lineData)=>{_handleRequest(host.label,host.port,lineData)});
   tail.on('error',console.error);
