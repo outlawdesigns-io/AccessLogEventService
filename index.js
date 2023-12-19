@@ -37,7 +37,7 @@ function _handleRequest(host,port,lineData){
 function _registerHost(host){
   let logPath = global.config[process.env.NODE_ENV].DEBUG ? host.log_path.replace(global.config[process.env.NODE_ENV].LOGPREFIX,global.config[process.env.NODE_ENV].LOGPREFIX_REP):host.log_path;
   let tail = new Tail(logPath);
-  tail.on('line',(lineData)=>{_handleRequest(host.label,host.port,lineData)});
+  tail.on('line',(lineData)=>{console.log(lineData);_handleRequest(host.label,host.port,lineData)});
   tail.on('error',console.error);
 }
 
