@@ -1,4 +1,4 @@
-FROM node:carbon
+FROM node
 WORKDIR /usr/src/app/
 ENV TZ=America/Chicago
 ARG DOCKER_ENV
