@@ -1,0 +1,10 @@
+version: '3.1'
+
+services:
+  backend:
+    image: accesslogevents-wamp
+    build:
+      context: $DOCKER_BUILD_DIR/AccessLogEventService/
+      dockerfile: $DOCKER_BUILD_DIR/AccessLogEventService/Dockerfile
+    volumes:
+      - $DOCKER_SHARED_LOG_DIR:/mnt/LOE/log
