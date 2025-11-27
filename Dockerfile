@@ -1,4 +1,4 @@
-node:20-bullseye
+FROM node:20-bullseye
 WORKDIR /usr/src/app/
 RUN mkdir /log
 COPY . .
