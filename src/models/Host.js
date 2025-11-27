@@ -1,14 +1,17 @@
 "use strict";
 
-const Record = require('outlawdesigns.io.noderecord');
+const Record = require('@outlawdesigns/db-record');
 
 class Host extends Record{
 
+  static table = 'hosts';
+  static primaryKey = 'id';
+  static get database(){
+    return process.env.MODEL_DB || 'web_access_test';
+  }
+
   constructor(id){
-    const database = process.env.NODE_ENV == 'production' ? 'web_access':'web_access_test';
-    const table = 'hosts';
-    const primaryKey = 'id';
-    super(database,table,primaryKey,id);
+    super(Host.database,Host.table,Host.primaryKey,id);
     this.publicKeys = [
       'id',
       'label',
@@ -16,15 +19,6 @@ class Host extends Record{
       'port',
       'log_path'
     ];
-  }
-  async getAll(){
-    let objs = [];
-    let ids = await this._getAll();
-    for(let id in ids){
-      let obj = await new Host(ids[id][this.primaryKey])._build();
-      objs.push(obj._buildPublicObj());
-    }
-    return objs;
   }
 }
 

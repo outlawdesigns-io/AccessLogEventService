@@ -1,10 +1,12 @@
 const Tail = require('tail').Tail;
-const AccessLogParser = require('outlawdesigns.io.accesslogparser');
+const AccessLogParser = require('@outlawdesigns/access-log-parser');
 const Host = require('./src/models/Host');
 const Request = require('./src/models/Request');
 
-global.config = require('./config');
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+// global.config = require('./config');
+require('./config.js');
+
+const DEBUG = process.env.DEBUG === 'true';
 
 function _HisDate(dateObj){
   let date = dateObj.getFullYear() + '-' + (dateObj.getMonth()+1) + '-' + dateObj.getDate();
@@ -31,18 +33,21 @@ function _mapRequest(host,port,lineData){
   return req;
 }
 function _handleRequest(host,port,lineData){
-  let request = _mapRequest(host,port,AccessLogParser.parseLine(lineData));
-  global.config[process.env.NODE_ENV].DEBUG ? console.log(request._buildPublicObj()): request._create();
+  let parsedLine = AccessLogParser.parseLine(lineData);
+  if(!parsedLine){
+    return;
+  }
+  let request = _mapRequest(host,port,parsedLine);
+  DEBUG ? console.log(request.getPublicProperties()): request.create();
 }
 function _registerHost(host){
-  let logPath = global.config[process.env.NODE_ENV].DEBUG ? host.log_path.replace(global.config[process.env.NODE_ENV].LOGPREFIX,global.config[process.env.NODE_ENV].LOGPREFIX_REP):host.log_path;
+  let logPath = DEBUG ? host.log_path.replace(process.env.LOGPREFIX,process.env.LOGPREFIX_REP):host.log_path;
   let tail = new Tail(logPath);
   tail.on('line',(lineData)=>{console.log(lineData);_handleRequest(host.label,host.port,lineData)});
   tail.on('error',console.error);
 }
 
 (async ()=>{
-  let host = new Host();
-  let hosts = await host.getAll();
+  let hosts = await Host.getAll();
   hosts.forEach(_registerHost);
 })();

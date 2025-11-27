@@ -1,14 +1,17 @@
 "use strict";
 
-const Record = require('outlawdesigns.io.noderecord');
+const Record = require('@outlawdesigns/db-record');
 
 class Request extends Record{
 
+  static table = 'requests';
+  static primaryKey = 'id';
+  static get database(){
+    return process.env.MODEL_DB || 'web_access_test';
+  }
+
   constructor(id){
-    const database = process.env.NODE_ENV == 'production' ? 'web_access':'web_access_test';
-    const table = 'requests';
-    const primaryKey = 'id';
-    super(database,table,primaryKey,id);
+    super(Request.database,Request.table,Request.primaryKey,id);
     this.publicKeys = [
       'id',
       'host',

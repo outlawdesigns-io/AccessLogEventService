@@ -1,5 +1,5 @@
 {
-  "name": "watchfile",
+  "name": "@outlawdesigns/accesslogs-consumer",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,8 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "outlawdesigns.io.accesslogparser": "^1.0.3",
-    "outlawdesigns.io.noderecord": "^1.0.7",
+    "@outlawdesigns/access-log-parser": "^1.0.0",
+    "@outlawdesigns/db-record": "^1.1.0",
     "tail": "^2.0.4"
   }
 }
